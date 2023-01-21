@@ -11,10 +11,11 @@ White #fff
 
 */
 
-* {
+body {
   color: black;
-  font-family: "Courier New", Courier, monospace;
   font-size: large;
+  font-weight: 800;
+  font-family: "Alfa Slab One", cursive;
 }
 
 header,
@@ -25,11 +26,14 @@ h1 {
   display: flex;
   justify-content: left;
   align-items: center;
-  font-size: larger;
-  padding: 10px;
+}
+
+p {
+  color: #fff;
+  padding-left: 25px;
 }
 
 .currentDay {
   color: #fff;
-  padding: 20px;
+  padding: 5px;
 }
