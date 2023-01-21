@@ -7,8 +7,25 @@
     <title>Jesse's Weather by Location Application</title>
     <link rel="stylesheet" href="assets\reset.css">
     <link rel="stylesheet" href="assets\style.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.34/dayjs.min.js"></script>
   </head>
   <body>
+    <header class="weather_dashb">Weather Dashboard
+        <h1 class="currentDay">Local Date & Time:</h1>
+    </header>
+    <main> 
+        <div class="currentdisplay"></div>
+        <div class="forecast">5 Day Forecast
+            <div class="container"></div>
+        </div>
+    </main>
+    <aside> 
+        <div class="search_bar">Search for a city:</div>
+        <button class="Search">Search</button>        
+        <div class="previous_entries"></div>
+    </aside>
+    
 	<script src="assets\script.js"></script>
   </body>
 </html>
