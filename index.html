@@ -10,8 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet"> 
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.34/dayjs.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   </head>
   <body>
     <header class="weather_dashb">Weather Dashboard
@@ -19,14 +20,18 @@
         <span class="currentDay"></span>
     </header>
     <main> 
-        <div class="currentdisplay"></div>
+        <div class="currentDisplay"></div>
         <div class="forecast">5 Day Forecast:
             <div class="container"></div>
         </div>
     </main>
     <aside> 
-        <div class="search_bar">Search for a City:</div>
-        <button class="Search">Search</button>        
+      <!-- <div class="search_bar">Search for a City:</div>--> 
+        <form>
+          <label for="cityName">Search for a City:</label>
+          <input type="text" id="cityName">
+          <input type="submit" value="Search">
+        </form>      
         <div class="previous_entries"></div>
     </aside>
     

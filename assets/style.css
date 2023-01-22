@@ -22,10 +22,11 @@ header,
 h1 {
   background-color: #033f63;
   color: #fedc97;
-  height: 50px;
+  height: 70px;
   display: flex;
   justify-content: left;
   align-items: center;
+  padding-left: 25px;
 }
 
 p {
