@@ -38,3 +38,16 @@ p {
   color: #fff;
   padding: 5px;
 }
+
+.currentDisplay {
+  background-color: #7c9885;
+  padding: 10px;
+  margin: 10px;
+  font-size: 20px;
+  color: #fff;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+}
