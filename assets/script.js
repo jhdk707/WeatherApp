@@ -1,4 +1,3 @@
-//api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key} - key for 5 day forcast
 var APIKey = "34076cf95082839460dfb8d261ada036";
 var queryURL = "https://api.openweathermap.org/data/2.5";
 var previousSearches = [];
@@ -11,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     currentDay.innerHTML = time;
   }, 1000);
 });
-
+//// gets City name request via input box and search button
 document.querySelector("form").addEventListener("submit", function (event) {
   event.preventDefault();
   getCityName();
@@ -28,9 +27,7 @@ function getCityName() {
   fetch(queryURL)
     .then((response) => response.json())
     .then((data) => {
-      // Display current searched weather data
-      var cityState = document.querySelector(".city-state");
-      cityState.innerHTML = data.name + ", " + data.sys.country;
+      // Display current searched weather data //////////////////////////////
       var currentWeather = data.weather[0].main;
       var kelvinTemp = data.main.temp;
       var currentTempF = ((kelvinTemp - 273.15) * 9) / 5 + 32;
@@ -46,10 +43,8 @@ function getCityName() {
       <p>Wind Speed: ${currentWind}</p>
       <img src="https://openweathermap.org/img/w/${currentIcon}.png">`;
       previousSearches.push(data);
-      displayPreviousSearches();
-    })
-    .then(() => {
-      get5DayForecast(city);
+      displayPreviousSearches(data);
+      get5DayForecast(city, data);
     });
   function get5DayForecast(city) {
     var forecastURL =
@@ -59,24 +54,24 @@ function getCityName() {
       APIKey;
     fetch(forecastURL)
       .then((response) => response.json())
-      .then((data) => {
-        // Display 5 day forecast data
+      .then((forecastData) => {
+        // Display 5 day forecast data ///////////////////////////////////////
         var forecastContainer = document.querySelector(".forecast .container");
         forecastContainer.innerHTML = "";
-        for (var i = 0; i < data.list.length; i++) {
-          var forecast = data.list[i];
+        for (var i = 0; i < forecastData.list.length; i++) {
+          var forecast = forecastData.list[i];
           var forecastDate = new Date(forecast.dt * 1000);
           var forecastIcon = forecast.weather[0].icon;
           var forecastTempF = ((forecast.main.temp - 273.15) * 9) / 5 + 32;
           var forecastHumidity = forecast.main.humidity;
           forecastContainer.innerHTML += `
-              <div class="forecast-item">
-                <p>Date: ${forecastDate.toLocaleDateString()}</p>
-                <img src="https://openweathermap.org/img/w/${forecastIcon}.png">
-                <p>Temperature: ${forecastTempF.toFixed(2)}F</p>
-                <p>Humidity: ${forecastHumidity}</p>
-              </div>
-            `;
+                    <div class="forecast-item">
+                      <p>Date: ${forecastDate.toLocaleDateString()}</p>
+                      <img src="https://openweathermap.org/img/w/${forecastIcon}.png">
+                      <p>Temperature: ${forecastTempF.toFixed(2)}F</p>
+                      <p>Humidity: ${forecastHumidity}</p>
+                    </div>
+                  `;
         }
       })
       .catch((error) => {
@@ -84,12 +79,15 @@ function getCityName() {
       });
   }
 }
-var cityData = data;
-function displayPreviousSearches() {
-  var previousSearchesDiv = document.querySelector(".previousSearches");
-  previousSearchesDiv.innerHTML += `<p>City: ${cityData.name}, ${cityData.sys.country}</p>`;
+function displayPreviousSearches(cityData) {
+  var previousSearchesContainer = document.querySelector(
+    ".previousSearchesContainer"
+  );
+  previousSearchesContainer.innerHTML = "";
   for (var i = 0; i < previousSearches.length; i++) {
     var cityData = previousSearches[i];
-    previousSearchesDiv.innerHTML += `<p>City: ${cityData.name}, ${cityData.sys.country}</p>`;
+    var cityName = cityData.name;
+    var cityCountry = cityData.sys.country;
+    previousSearchesContainer.innerHTML += `<p>${cityName}, ${cityCountry}</p>`;
   }
 }
