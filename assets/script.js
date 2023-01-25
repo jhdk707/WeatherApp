@@ -55,17 +55,34 @@ function getCityName() {
     fetch(forecastURL)
       .then((response) => response.json())
       .then((forecastData) => {
-        // Display 5 day forecast data ///////////////////////////////////////
-        var forecastContainer = document.querySelector(".forecast .container");
-        forecastContainer.innerHTML = "";
-        for (var i = 0; i < forecastData.list.length; i++) {
+        // Get todays date ///////////////////////////////////////////////////
+        var today = new Date();
+        // Create new empty array to store the 5 day forecast ////////////////
+        var fiveDayForecast = [];
+        // Loop through all of the forecast data /////////////////////////////
+        for (var i = 0; i < fiveDayForecast.length; i++) {
           var forecast = forecastData.list[i];
+          var forecastData = new Date(forecast.dt * 1000);
+          // Check if the forecast is withing the next 5 days
+          if (
+            forecastData.getTime() >= today.getTime() &&
+            forecastData.getTime() < today.getTime() + 5 * 24 * 60 * 60 * 1000
+          ) {
+            // If it is, add it to the fiveDayForecast array
+            fiveDayForecast.push(forecast);
+          }
+        }
+        // Display 5 day forecast data ///////////////////////////////////////
+        var forecastContainer = document.querySelector("forecastContainer");
+        forecastContainer.innerHTML = "";
+        for (var i = 0; i < fiveDayForecast.length; i++) {
+          var forecast = fiveDayForecast[i];
           var forecastDate = new Date(forecast.dt * 1000);
           var forecastIcon = forecast.weather[0].icon;
           var forecastTempF = ((forecast.main.temp - 273.15) * 9) / 5 + 32;
           var forecastHumidity = forecast.main.humidity;
           forecastContainer.innerHTML += `
-                    <div class="forecast-item">
+                    <div class ="forecast-item" >
                       <p>Date: ${forecastDate.toLocaleDateString()}</p>
                       <img src="https://openweathermap.org/img/w/${forecastIcon}.png">
                       <p>Temperature: ${forecastTempF.toFixed(2)}F</p>
