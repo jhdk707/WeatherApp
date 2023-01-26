@@ -1,6 +1,7 @@
 var APIKey = "34076cf95082839460dfb8d261ada036";
 var queryURL = "https://api.openweathermap.org/data/2.5";
 var previousSearches = [];
+var forecastContainer = document.querySelector(".forecastContainer");
 
 document.addEventListener("DOMContentLoaded", function () {
   // Timer function to present local date and time in header
@@ -73,7 +74,6 @@ function getCityName() {
           }
         }
         // Display 5 day forecast data ///////////////////////////////////////
-        var forecastContainer = document.querySelector("forecastContainer");
         forecastContainer.innerHTML = "";
         for (var i = 0; i < fiveDayForecast.length; i++) {
           var forecast = fiveDayForecast[i];
@@ -101,7 +101,7 @@ function displayPreviousSearches(cityData) {
     ".previousSearchesContainer"
   );
   previousSearchesContainer.innerHTML = "";
-  for (var i = 0; i < previousSearches.length; i++) {
+  for (var i = 0; i < previousSearchesContainer.length; i++) {
     var cityData = previousSearches[i];
     var cityName = cityData.name;
     var cityCountry = cityData.sys.country;
